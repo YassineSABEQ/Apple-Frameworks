@@ -10,7 +10,7 @@ import SwiftUI
 struct FrameworkDetailView: View {
         
     let framework: Framework
-    @Binding var isShowingDetailView: Bool
+//    @Binding var isShowingDetailView: Bool
     @State var isShowingWebFrameworkDetail: Bool = false
 
     var body: some View {
@@ -48,6 +48,6 @@ struct FrameworkDetailView: View {
 
 struct FrameworkDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameworkDetailView(framework: MockData.sampleFramework, isShowingDetailView: .constant(false))
+        FrameworkDetailView(framework: MockData.sampleFramework)
     }
 }

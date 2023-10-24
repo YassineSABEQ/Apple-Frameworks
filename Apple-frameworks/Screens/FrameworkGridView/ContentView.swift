@@ -12,16 +12,25 @@ struct ContentView: View {
     @StateObject var viewModel = FrameworkGridViewModel()
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(MockData.frameworks) { framework in
-                    NavigationLink(destination: FrameworkDetailView(framework: framework, isShowingDetailView: $viewModel.isShowingDetailView)) {
-                        AppFrameworkView(framework: framework)
+        // Navigation Stack is new in iOS 16
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: viewModel.columns) {
+                    ForEach(MockData.frameworks) { framework in
+                        NavigationLink(value: framework) {
+                            AppFrameworkView(framework: framework)
+                        }
+//                        NavigationLink(destination: FrameworkDetailView(framework: framework)) {
+//                            AppFrameworkView(framework: framework)
+//                        }
                     }
                 }
             }
             .padding(.top)
             .navigationTitle("🍎 Frameworks")
+            .navigationDestination(for: Framework.self) { framework in
+                FrameworkDetailView(framework: framework)
+            }
         }
         .accentColor(Color(.label))
         .preferredColorScheme(.dark)

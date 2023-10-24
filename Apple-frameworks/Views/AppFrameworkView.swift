@@ -11,7 +11,7 @@ struct AppFrameworkView: View {
     let framework: Framework
     
     var body: some View {
-        HStack {
+        VStack {
             Image(framework.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -22,7 +22,6 @@ struct AppFrameworkView: View {
                 .scaledToFit()
                 .minimumScaleFactor(0.6)
                 .foregroundColor(.white)
-                .padding()
         }
     }
 }
