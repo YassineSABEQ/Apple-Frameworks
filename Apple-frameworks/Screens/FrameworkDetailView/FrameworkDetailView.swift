@@ -15,12 +15,10 @@ struct FrameworkDetailView: View {
 
     var body: some View {
         VStack {
-            DismissButtonView(isShowingDetailView: $isShowingDetailView)
-            
             VStack(spacing: 10) {
                 Spacer()
                 AppFrameworkView(framework: framework)
-                
+                Spacer()
                 TextView(framework: framework)
                 
                 Spacer()
@@ -28,12 +26,13 @@ struct FrameworkDetailView: View {
                 Button {
                     isShowingWebFrameworkDetail = true
                 } label: {
-                    ButtonView(buttonText: "Learn more", buttonBackgroundColor: .red)
+//                    ButtonView(buttonText: "Learn more", buttonBackgroundColor: .red)
+                    Label("Learn More", systemImage: "book.fill")
                 }
-//                .sheet(isPresented: $isShowingWebFrameworkDetail) {
-////                    Link(framework.name, destination: URL(string: framework.urlString)!)
-//                    SafariWebView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)
-//                }
+                // new in ios 15
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                .tint(.red)
                 
                 .fullScreenCover(isPresented: $isShowingWebFrameworkDetail) {
                     SafariWebView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)

@@ -11,19 +11,19 @@ struct AppFrameworkView: View {
     let framework: Framework
     
     var body: some View {
-        VStack {
+        HStack {
             Image(framework.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 80, height: 80)
+                .frame(width: 70, height: 70)
             Text(framework.name)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .scaledToFit()
                 .minimumScaleFactor(0.6)
                 .foregroundColor(.white)
+                .padding()
         }
-        .padding()
     }
 }
 
