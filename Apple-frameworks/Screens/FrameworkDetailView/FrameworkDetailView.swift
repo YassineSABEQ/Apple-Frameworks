@@ -11,37 +11,32 @@ struct FrameworkDetailView: View {
         
     let framework: Framework
     @Binding var isShowingDetailView: Bool
+    @State var isShowingWebFrameworkDetail: Bool = false
 
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button {
-                    isShowingDetailView = false
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(Color(.label))
-                        .imageScale(.large)
-                        .frame(width: 44, height: 44)
-                }.padding()
-            }
+            DismissButtonView(isShowingDetailView: $isShowingDetailView)
             
             VStack(spacing: 10) {
                 Spacer()
                 AppFrameworkView(framework: framework)
                 
-                Text(framework.description)
-                    .font(.body)
-                    .fontWeight(.light)
-                    .lineLimit(nil)
-                    .foregroundColor(.white)
-                    .padding()
+                TextView(framework: framework)
                 
                 Spacer()
                 
                 Button {
+                    isShowingWebFrameworkDetail = true
                 } label: {
                     ButtonView(buttonText: "Learn more", buttonBackgroundColor: .red)
+                }
+//                .sheet(isPresented: $isShowingWebFrameworkDetail) {
+////                    Link(framework.name, destination: URL(string: framework.urlString)!)
+//                    SafariWebView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)
+//                }
+                
+                .fullScreenCover(isPresented: $isShowingWebFrameworkDetail) {
+                    SafariWebView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)
                 }
             }
         }
