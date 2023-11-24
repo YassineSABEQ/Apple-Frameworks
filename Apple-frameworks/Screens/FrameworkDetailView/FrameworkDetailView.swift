@@ -24,7 +24,6 @@ struct FrameworkDetailView: View {
                 Button {
                     viewModel.isShowingWebFrameworkDetail = true
                 } label: {
-//                    ButtonView(buttonText: "Learn more", buttonBackgroundColor: .red)
                     Label("Learn More", systemImage: "book.fill")
                 }
                 // new in ios 15
