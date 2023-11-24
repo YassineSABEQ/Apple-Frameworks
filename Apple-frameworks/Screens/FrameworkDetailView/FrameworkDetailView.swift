@@ -9,22 +9,20 @@ import SwiftUI
 
 struct FrameworkDetailView: View {
         
-    let framework: Framework
-//    @Binding var isShowingDetailView: Bool
-    @State var isShowingWebFrameworkDetail: Bool = false
+    @ObservedObject var viewModel: FrameworkDetailViewModel
 
     var body: some View {
         VStack {
             VStack(spacing: 10) {
                 Spacer()
-                AppFrameworkView(framework: framework)
+                AppFrameworkView(framework: viewModel.framework)
                 Spacer()
-                TextView(framework: framework)
+                TextView(framework: viewModel.framework)
                 
                 Spacer()
                 
                 Button {
-                    isShowingWebFrameworkDetail = true
+                    viewModel.isShowingWebFrameworkDetail = true
                 } label: {
 //                    ButtonView(buttonText: "Learn more", buttonBackgroundColor: .red)
                     Label("Learn More", systemImage: "book.fill")
@@ -34,8 +32,8 @@ struct FrameworkDetailView: View {
                 .controlSize(.large)
                 .tint(.red)
                 
-                .fullScreenCover(isPresented: $isShowingWebFrameworkDetail) {
-                    SafariWebView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)
+                .fullScreenCover(isPresented: $viewModel.isShowingWebFrameworkDetail) {
+                    SafariWebView(url: URL(string: viewModel.framework.urlString) ?? URL(string: "www.apple.com")!)
                 }
             }
         }
@@ -48,6 +46,6 @@ struct FrameworkDetailView: View {
 
 struct FrameworkDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FrameworkDetailView(framework: MockData.sampleFramework)
+        FrameworkDetailView(viewModel: FrameworkDetailViewModel(framework: MockData.sampleFramework, isShowingWebFrameworkDetail: false))
     }
 }

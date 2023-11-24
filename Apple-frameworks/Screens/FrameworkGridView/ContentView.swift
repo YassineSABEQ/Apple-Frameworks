@@ -20,16 +20,13 @@ struct ContentView: View {
                         NavigationLink(value: framework) {
                             AppFrameworkView(framework: framework)
                         }
-//                        NavigationLink(destination: FrameworkDetailView(framework: framework)) {
-//                            AppFrameworkView(framework: framework)
-//                        }
                     }
                 }
             }
             .padding(.top)
             .navigationTitle("🍎 Frameworks")
             .navigationDestination(for: Framework.self) { framework in
-                FrameworkDetailView(framework: framework)
+                FrameworkDetailView(viewModel: FrameworkDetailViewModel(framework: framework, isShowingWebFrameworkDetail: false))
             }
         }
         .accentColor(Color(.label))
